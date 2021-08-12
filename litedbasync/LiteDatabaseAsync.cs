@@ -202,42 +202,6 @@ namespace LiteDB.Async
         #endregion
 
         #region Transactions
-        /// <summary>
-        /// Initialize a new transaction. Transaction are created "per-thread". There is only one single transaction per thread.
-        /// Return true if transaction was created or false if current thread already in a transaction.
-        /// </summary>
-        public Task<bool> BeginTransAsync()
-        {
-            var tcs = new TaskCompletionSource<bool>();
-            Enqueue(tcs, () => {
-                tcs.SetResult(UnderlyingDatabase.BeginTrans());
-            });
-            return tcs.Task;
-        }
-
-        /// <summary>
-        /// Commit current transaction
-        /// </summary>
-        public Task<bool> CommitAsync()
-        {
-            var tcs = new TaskCompletionSource<bool>();
-            Enqueue(tcs, () => {
-                tcs.SetResult(UnderlyingDatabase.Commit());
-            });
-            return tcs.Task;
-        }
-
-        /// <summary>
-        /// Rollback current transaction
-        /// </summary>
-        public Task<bool> RollbackAsync()
-        {
-            var tcs = new TaskCompletionSource<bool>();
-            Enqueue(tcs, () => {
-                tcs.SetResult(UnderlyingDatabase.Rollback());
-            });
-            return tcs.Task;
-        }
 
         #endregion
 
