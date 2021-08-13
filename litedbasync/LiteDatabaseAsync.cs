@@ -203,7 +203,7 @@ namespace LiteDB.Async
 
         #region Transactions
 
-        public ILiteDatabaseAsync BeginTransAsync()
+        public ILiteDatabaseAsync BeginTransaction()
         {
             if (_connectionString == null || _connectionString.Connection == ConnectionType.Direct)
             {
