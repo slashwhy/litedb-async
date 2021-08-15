@@ -14,6 +14,7 @@ namespace LiteDB.Async
         /// <param name="unique">If is a unique index</param>
         public Task<bool> EnsureIndexAsync(string name, BsonExpression expression, bool unique = false)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.EnsureIndex(name, expression, unique));
@@ -28,6 +29,7 @@ namespace LiteDB.Async
         /// <param name="unique">If is a unique index</param>
         public Task<bool> EnsureIndexAsync(BsonExpression expression, bool unique = false)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.EnsureIndex(expression, unique));
@@ -42,6 +44,7 @@ namespace LiteDB.Async
         /// <param name="unique">Create a unique keys index?</param>
         public Task<bool> EnsureIndexAsync<K>(Expression<Func<T, K>> keySelector, bool unique = false)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.EnsureIndex(keySelector, unique));
@@ -57,6 +60,7 @@ namespace LiteDB.Async
         /// <param name="unique">Create a unique keys index?</param>
         public Task<bool> EnsureIndexAsync<K>(string name, Expression<Func<T, K>> keySelector, bool unique = false)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.EnsureIndex<K>(name, keySelector, unique));
@@ -69,6 +73,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<bool> DropIndexAsync(string name)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.DropIndex(name));

@@ -11,6 +11,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<bool> DeleteAsync(BsonValue id)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Delete(id));
@@ -23,6 +24,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> DeleteManyAsync(BsonExpression predicate)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.DeleteMany(predicate));
@@ -35,6 +37,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> DeleteManyAsync(string predicate, BsonDocument parameters)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.DeleteMany(predicate, parameters));
@@ -47,6 +50,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> DeleteManyAsync(string predicate, params BsonValue[] args)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.DeleteMany(predicate, args));
@@ -59,6 +63,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> DeleteManyAsync(Expression<Func<T, bool>> predicate)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.DeleteMany(predicate));
@@ -71,6 +76,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> DeleteAllAsync()
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.DeleteAll());

@@ -12,6 +12,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<bool> UpdateAsync(T entity)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Update(entity));
@@ -25,6 +26,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<bool> UpdateAsync(BsonValue id, T entity)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Update(id, entity));
@@ -37,6 +39,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> UpdateAsync(IEnumerable<T> entities)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Update(entities));
@@ -50,6 +53,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> UpdateManyAsync(BsonExpression transform, BsonExpression predicate)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.UpdateMany(transform, predicate));
@@ -63,6 +67,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> UpdateManyAsync(Expression<Func<T, T>> extend, Expression<Func<T, bool>> predicate)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.UpdateMany(extend, predicate));

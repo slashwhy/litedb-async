@@ -11,6 +11,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> CountAsync()
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Count());
@@ -23,6 +24,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> CountAsync(BsonExpression predicate)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Count(predicate));
@@ -35,6 +37,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> CountAsync(string predicate, BsonDocument parameters)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Count(predicate, parameters));
@@ -48,6 +51,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> CountAsync(Expression<Func<T, bool>> predicate)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Count(predicate));
@@ -60,6 +64,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> CountAsync(Query query)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Count(query));
@@ -72,6 +77,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<int> CountAsync(string predicate, params BsonValue[] args)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<int>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Count(predicate, args));
@@ -84,6 +90,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<long> LongCountAsync()
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<long>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.LongCount());
@@ -96,6 +103,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<long> LongCountAsync(BsonExpression predicate)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<long>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.LongCount(predicate));
@@ -108,6 +116,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<long> LongCountAsync(string predicate, BsonDocument parameters)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<long>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.LongCount(predicate, parameters));
@@ -120,6 +129,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<long> LongCountAsync(string predicate, params BsonValue[] args)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<long>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.LongCount(predicate, args));
@@ -132,6 +142,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<long> LongCountAsync(Expression<Func<T, bool>> predicate)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<long>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.LongCount(predicate));
@@ -144,6 +155,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<long> LongCountAsync(Query query)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<long>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.LongCount(query));
@@ -156,6 +168,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<bool> ExistsAsync(BsonExpression predicate)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Exists(predicate));
@@ -168,6 +181,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<bool> ExistsAsync(string predicate, BsonDocument parameters)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Exists(predicate, parameters));
@@ -180,6 +194,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<bool> ExistsAsync(string predicate, params BsonValue[] args)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Exists(predicate, args));
@@ -192,6 +207,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<bool> ExistsAsync(Expression<Func<T, bool>> predicate)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Exists(predicate));
@@ -204,6 +220,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<bool> ExistsAsync(Query query)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<bool>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Exists(query));
@@ -218,6 +235,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<BsonValue> MinAsync(BsonExpression keySelector)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<BsonValue>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Min(keySelector));
@@ -230,6 +248,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<BsonValue> MinAsync()
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<BsonValue>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Min());
@@ -242,6 +261,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<K> MinAsync<K>(Expression<Func<T, K>> keySelector)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<K>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Min(keySelector));
@@ -254,6 +274,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<BsonValue> MaxAsync(BsonExpression keySelector)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<BsonValue>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Max(keySelector));
@@ -266,6 +287,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<BsonValue> MaxAsync()
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<BsonValue>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Max());
@@ -278,6 +300,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<K> MaxAsync<K>(Expression<Func<T, K>> keySelector)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<K>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Max(keySelector));

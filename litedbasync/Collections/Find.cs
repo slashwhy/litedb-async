@@ -14,6 +14,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<IEnumerable<T>> FindAsync(BsonExpression predicate, int skip = 0, int limit = int.MaxValue)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<IEnumerable<T>>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Find(predicate, skip, limit));
@@ -26,6 +27,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<IEnumerable<T>> FindAsync(Query query, int skip = 0, int limit = int.MaxValue)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<IEnumerable<T>>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Find(query, skip, limit));
@@ -38,6 +40,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate, int skip = 0, int limit = int.MaxValue)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<IEnumerable<T>>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.Find(predicate, skip, limit));
@@ -54,6 +57,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<T> FindByIdAsync(BsonValue id)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<T>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.FindById(id));
@@ -66,6 +70,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<T> FindOneAsync(BsonExpression predicate)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<T>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.FindOne(predicate));
@@ -78,6 +83,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<T> FindOneAsync(string predicate, BsonDocument parameters)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<T>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.FindOne(predicate, parameters));
@@ -90,6 +96,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<T> FindOneAsync(BsonExpression predicate, params BsonValue[] args)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<T>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.FindOne(predicate, args));
@@ -102,6 +109,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<T> FindOneAsync(Expression<Func<T, bool>> predicate)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<T>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.FindOne(predicate));
@@ -114,6 +122,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<T> FindOneAsync(Query query)
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<T>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.FindOne(query));
@@ -126,6 +135,7 @@ namespace LiteDB.Async
         /// </summary>
         public Task<IEnumerable<T>> FindAllAsync()
         {
+            VerifyNoClosedTransaction();
             var tcs = new TaskCompletionSource<IEnumerable<T>>();
             Database.Enqueue(tcs, () => {
                 tcs.SetResult(UnderlyingCollection.FindAll());
