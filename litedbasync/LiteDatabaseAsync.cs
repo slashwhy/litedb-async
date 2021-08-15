@@ -253,6 +253,16 @@ namespace LiteDB.Async
             _isClosedTransaction = true;
         }
 
+        public async Task RollbackAsync()
+        {
+            var tcs = new TaskCompletionSource<bool>();
+            Enqueue(tcs, () => {
+                tcs.SetResult(UnderlyingDatabase.Rollback());
+            });
+            await tcs.Task;
+            _isClosedTransaction = true;
+        }
+
         #endregion
 
         #region Pragmas
